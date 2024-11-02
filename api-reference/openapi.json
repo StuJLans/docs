@@ -1,195 +1,326 @@
 {
-  "openapi": "3.0.1",
-  "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
+    "openapi": "3.0.0",
+    "info": {
+        "title": "External Image API",
+        "description": "",
+        "version": "0.0.1"
     },
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
+    "servers": [
+        {
+            "url": "https://x21u-twbn-azx4.n7c.xano.io/api:INFikBde"
         }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
-          },
-          "required": true
         },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
+        "schemas": {}
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+    "paths": {
+        "/image_api_original_no_bubble": {
+            "post": {
+                "summary": "",
+                "description": "\u003Cbr /\u003E\u003Cbr /\u003E\n\u003Cb\u003EAuthentication:\u003C/b\u003E not required",
+                "tags": [
+                    "image_api_original_no_bubble"
+                ],
+                "security": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "processing": {
+                                            "type": "string"
+                                        },
+                                        "remaining_credits": {
+                                            "type": "string"
+                                        },
+                                        "return_url": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Input Error. Check the request payload for issues."
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Access denied. Additional privileges are needed access the requested resource."
+                    },
+                    "404": {
+                        "description": "Not Found. The requested resource does not exist."
+                    },
+                    "429": {
+                        "description": "Rate Limited. Too many requests."
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "the_id": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "webhook": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "prompt": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "guidance": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "aspect": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "negative": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "model": {
+                                        "type": "string",
+                                        "description": ""
+                                    }
+                                }
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "the_id": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "webhook": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "prompt": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "guidance": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "aspect": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "negative": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "model": {
+                                        "type": "string",
+                                        "description": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
+        },
+        "/image_api": {
+            "post": {
+                "summary": "This will kick off the API process.",
+                "description": "This will kick off the API process.\n\u003Cbr /\u003E\u003Cbr /\u003E\n\u003Cb\u003EAuthentication:\u003C/b\u003E not required",
+                "tags": [
+                    "image_api"
+                ],
+                "security": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "processing": {
+                                            "type": "string"
+                                        },
+                                        "remaining_credits": {
+                                            "type": "string"
+                                        },
+                                        "return_url": {
+                                            "type": "string"
+                                        },
+                                        "uniqueString": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Input Error. Check the request payload for issues."
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Access denied. Additional privileges are needed access the requested resource."
+                    },
+                    "404": {
+                        "description": "Not Found. The requested resource does not exist."
+                    },
+                    "429": {
+                        "description": "Rate Limited. Too many requests."
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "the_id": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "webhook": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "prompt": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "guidance": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "aspect": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "negative": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "model": {
+                                        "type": "string",
+                                        "description": ""
+                                    }
+                                }
+                            }
+                        },
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "the_id": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "webhook": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "prompt": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "guidance": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "aspect": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "negative": {
+                                        "type": "string",
+                                        "description": ""
+                                    },
+                                    "model": {
+                                        "type": "string",
+                                        "description": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
+        },
+        "/image_testing": {
+            "get": {
+                "summary": "",
+                "description": "\u003Cbr /\u003E\u003Cbr /\u003E\n\u003Cb\u003EAuthentication:\u003C/b\u003E required",
+                "tags": [
+                    "image_testing"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Success!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Input Error. Check the request payload for issues."
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Access denied. Additional privileges are needed access the requested resource."
+                    },
+                    "404": {
+                        "description": "Not Found. The requested resource does not exist."
+                    },
+                    "429": {
+                        "description": "Rate Limited. Too many requests."
+                    },
+                    "500": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
     }
-  }
 }
